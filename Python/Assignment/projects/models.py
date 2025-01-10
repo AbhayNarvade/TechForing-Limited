@@ -11,6 +11,7 @@ class Project(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return self.name

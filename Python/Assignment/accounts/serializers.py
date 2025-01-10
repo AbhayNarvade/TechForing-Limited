@@ -5,9 +5,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name']  # Only return the user-specified fields
-        extra_kwargs = {
-            'password': {'write_only': True},  # Password should be write-only, so it's not included in responses
-        }
+        
 
     def create(self, validated_data):
         """
@@ -20,13 +18,16 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """
-        Override update method to handle password update, if present
+        Override update method to handle password update if it's provided
         """
-        password = validated_data.pop('password', None)  # Pop the password if it's being updated
+        password = validated_data.pop('password', None)  # Pop the password if it's present
+
+        # Update other fields
         instance = super().update(instance, validated_data)
 
         if password:
             instance.set_password(password)  # Hash the password
             instance.save()
+       
 
         return instance
