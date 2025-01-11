@@ -113,9 +113,4 @@ Visit `http://127.0.0.1:8000/` in your browser to view the app.
 
 The backend for this API was developed as part of the project for **TechForing Limited** to manage users, projects, tasks, and comments for their project management tool.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
-I've added the `makemigrations` command before `migrate` to ensure that the database schema is updated properly after changes to models.
