@@ -1,5 +1,4 @@
 
-
 ```markdown
 # Project Name - Project Management Tool
 
@@ -34,7 +33,7 @@ This is a backend API developed for **TechForing Limited**, which is building a 
 - **Update Project** (PUT/PATCH `/api/projects/{id}/`): Update project details.
 - **Delete Project** (DELETE `/api/projects/{id}/`): Delete a project.
 
-### Task
+### Tasks
 - **List Tasks** (GET `/api/projects/{project_id}/tasks/`): Retrieve a list of all tasks in a project.
 - **Create Task** (POST `/api/projects/{project_id}/tasks/`): Create a new task in a project.
 - **Retrieve Task** (GET `/api/tasks/{id}/`): Retrieve details of a specific task.
@@ -54,7 +53,7 @@ This is a backend API developed for **TechForing Limited**, which is building a 
 
 ```bash
 git clone https://github.com/AbhayNarvade/TechForing-Limited.git
-cd project-name
+cd TechForing-Limited
 ```
 
 ### 2. Set Up a Virtual Environment
@@ -79,6 +78,7 @@ pip install -r requirements.txt
 Make sure your database settings are correctly configured in `settings.py`. Then, run the migrations:
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
@@ -113,3 +113,9 @@ Visit `http://127.0.0.1:8000/` in your browser to view the app.
 
 The backend for this API was developed as part of the project for **TechForing Limited** to manage users, projects, tasks, and comments for their project management tool.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
+
+I've added the `makemigrations` command before `migrate` to ensure that the database schema is updated properly after changes to models.
