@@ -53,7 +53,7 @@ This is a backend API developed for **TechForing Limited**, which is building a 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/AbhayNarvade/TechForing-Limited.git
 cd project-name
 ```
 
