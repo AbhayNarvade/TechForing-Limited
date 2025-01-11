@@ -9,6 +9,9 @@ from projects.models import ProjectMember
 from rest_framework import viewsets
 from accounts.models import User
 from rest_framework.exceptions import ValidationError
+from tasks.models import Task
+from rest_framework.exceptions import NotFound
+from tasks.serializers import TaskSerializer
 
 class ProjectList(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]  # Uncomment if you want to enforce token authentication
@@ -128,3 +131,29 @@ class ProjectMemberDetail(generics.RetrieveUpdateDestroyAPIView):
         print(data)
         
         return Response(data, status=status.HTTP_200_OK)  # Return with 200 OK
+
+
+
+
+class TaskList(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]  # Uncomment if you want to enforce token authentication
+    permission_classes = [IsAuthenticated]
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+
+    def get_queryset(self):
+        project_id = self.kwargs.get('project_id')
+        if project_id:
+            queryset = Task.objects.filter(project_id=project_id)
+            if not queryset.exists():
+                raise NotFound(f"No tasks found for project_id {project_id}")
+            return queryset
+        raise NotFound("Project ID is required.")
+
+
+    def perform_create(self, serializer):
+        project_id = self.kwargs['project_id']
+        project = Project.objects.get(id=project_id)  # Fetch the Project object
+        serializer.save(project=project)
